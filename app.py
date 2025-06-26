@@ -427,11 +427,7 @@ st.dataframe(markup_df, use_container_width=True)
 # Instructions
 st.markdown("---")
 st.markdown("""
-### 🚀 **Next Steps:**
-1. **Update model path** in the sidebar to point to your actual sidewalkModel.pkl file
-2. **Test with different properties** including various sidewalk acreage amounts to verify accuracy 
-3. **Customize regional means** in the `create_regional_features()` function if needed
-4. **Add error handling** for specific edge cases in your business
+
 
 ### 💡 **New in Version 2:**
 - ✅ **Sidewalk Acreage** input field for more accurate pricing
