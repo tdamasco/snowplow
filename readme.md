@@ -9,7 +9,7 @@ A machine learning-powered tool for predicting snow removal subcontractor pricin
 - Markup analysis
 
 ## Usage
-Visit the deployed app: [Your App URL Here]
+Visit the deployed app: subcosts.streamlit.app
 
 Enter property details in the sidebar and get instant pricing predictions.
 
