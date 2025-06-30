@@ -401,7 +401,7 @@ with col2:
 # Markup Pricing Table
 st.header("Markup Pricing Options")
 
-markups = [0.15, 0.25, 0.35, 0.45]
+markups = [0.20, 0.25, 0.30, 0.35, 0.40, 0.45]
 markup_data = []
 markup_prices_per_acre = calculate_markup_prices(final_price_per_acre, markups)
 markup_prices_total = calculate_markup_prices(total_cost, markups)
