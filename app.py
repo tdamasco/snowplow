@@ -1,4 +1,5 @@
- # At the top of your streamlit file, add these imports and functions from your Predicting.py
+ #This is the file that is being used on subcosts.streamlit.app
+# It is the main entry point for the Streamlit app and contains the UI and logic for
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -134,12 +135,12 @@ def create_regional_features(df):
     # For Streamlit, we'll use hardcoded regional means since we don't have training data
     # You can replace these with actual values from your training data
     regional_means = {
-        'Central': {'price': 180, 'acreage': 15, 'snowfall': 12},
-        'West': {'price': 200, 'acreage': 18, 'snowfall': 14},
-        'East': {'price': 190, 'acreage': 16, 'snowfall': 13},
-        'North': {'price': 170, 'acreage': 14, 'snowfall': 16},
-        'South': {'price': 160, 'acreage': 12, 'snowfall': 10},
-        'Philly Metro': {'price': 220, 'acreage': 20, 'snowfall': 11}
+        'Central': {'price': 200, 'acreage': 10, 'snowfall': 12},
+        'West': {'price': 200, 'acreage': 10, 'snowfall': 12},
+        'East': {'price': 200, 'acreage': 10, 'snowfall': 9},
+        'North': {'price': 200, 'acreage': 10, 'snowfall': 18.4},
+        'National': {'price': 200, 'acreage': 10, 'snowfall': 10},
+        'Philly Metro': {'price': 200, 'acreage': 10, 'snowfall': 9.1}
     }
     
     # Add regional features
@@ -295,7 +296,7 @@ property_type = st.sidebar.selectbox(
 
 property_region = st.sidebar.selectbox(
     "Property Region",
-    options=["Central", "West", "East", "North", "South", "Philly Metro"],
+    options=["Central", "West", "East", "North", "National", "Philly Metro"],
     index=0
 )
 
@@ -401,7 +402,7 @@ with col2:
 # Markup Pricing Table
 st.header("Markup Pricing Options")
 
-markups = [0.20, 0.25, 0.30, 0.35, 0.40, 0.45]
+markups = [0.20, 0.25, 0.30, 0.35, 0.40, 0.45,]
 markup_data = []
 markup_prices_per_acre = calculate_markup_prices(final_price_per_acre, markups)
 markup_prices_total = calculate_markup_prices(total_cost, markups)
@@ -427,7 +428,11 @@ st.dataframe(markup_df, use_container_width=True)
 # Instructions
 st.markdown("---")
 st.markdown("""
-
+### 🚀 **Next Steps:**
+1. **Update model path** in the sidebar to point to your actual sidewalkModel.pkl file
+2. **Test with different properties** including various sidewalk acreage amounts to verify accuracy 
+3. **Customize regional means** in the `create_regional_features()` function if needed
+4. **Add error handling** for specific edge cases in your business
 
 ### 💡 **New in Version 2:**
 - ✅ **Sidewalk Acreage** input field for more accurate pricing
@@ -447,3 +452,4 @@ st.markdown("""
 - Orange warning means it's using the fallback calculation with sidewalk consideration
 - Sidewalk areas often require more intensive maintenance and may command higher per-acre rates
 """)
+
