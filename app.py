@@ -1,4 +1,4 @@
- #This is the file that is being used on subcosts.streamlit.app
+#This is the file that is being used on subcosts.streamlit.app
 # It is the main entry point for the Streamlit app and contains the UI and logic for
 import os
 import pandas as pd
@@ -93,6 +93,7 @@ def generate_complexity_pricing_table(model, sample_property, feature_cols, mult
     print(f"\nBase price (before complexity): ${base_price:,.2f}")
     print(f"Multiplier per complexity level: {multiplier_per_level:.1%}")
     return results
+
 def create_core_features(df):
     """Create core features INCLUDING sidewalk acreage features."""
     df = df.copy()
@@ -217,12 +218,6 @@ def predict_base_price_from_saved_model(model_path, input_df):
             base_price *= 1.1
         return base_price
 
-def apply_complexity_multiplier(base_price, complexity, multiplier_per_level=0.03):
-    """Apply hardcoded complexity multiplier to base price."""
-    complexity_adjustment = (complexity - 1) * multiplier_per_level
-    final_price = base_price * (1 + complexity_adjustment)
-    return final_price
-
 def calculate_markup_prices(base_cost, markups=[0.15, 0.25, 0.35, 0.45]):
     """Calculate final prices with different markup percentages."""
     markup_prices = {}
@@ -230,6 +225,140 @@ def calculate_markup_prices(base_cost, markups=[0.15, 0.25, 0.35, 0.45]):
         final_price = base_cost / (1 - markup)
         markup_prices[f"{markup*100:.0f}%"] = final_price
     return markup_prices
+
+# NEW FUNCTIONS FOR MARKET COMPARISON
+def load_training_dataset(dataset_path="data/NewFull.csv"):
+    """Load the training dataset containing all properties under contract."""
+    try:
+        df = pd.read_csv(dataset_path)
+        return df, True
+    except Exception as e:
+        st.error(f"Could not load training dataset: {str(e)}")
+        return None, False
+
+def get_similar_properties(df, zip_code, property_type=None, max_results=10):
+    """Filter properties by zip code and optionally by property type."""
+    if df is None:
+        return pd.DataFrame()
+    
+    # Convert zip_code to string and handle different formats
+    zip_code = str(zip_code).strip()
+    
+    # Ensure Zip Code column exists and convert to string
+    if 'Zip' not in df.columns:
+        st.warning("'Zip' column not found in dataset.")
+        return pd.DataFrame()
+    
+    df_copy = df.copy()
+    df_copy['Zip'] = df_copy['Zip'].astype(str).str.strip()
+    
+    # Filter by zip code
+    filtered_df = df_copy[df_copy['Zip'] == zip_code].copy()
+    
+    # Optionally filter by property type
+    if property_type and property_type != "Any":
+        if 'Property Type' in filtered_df.columns:
+            filtered_df = filtered_df[filtered_df['Property Type'] == property_type]
+    
+    # Sort by total acreage for consistency
+    if 'SubContractor Price Per Acre' in filtered_df.columns:
+        filtered_df = filtered_df.sort_values('SubContractor Price Per Acre')
+    
+    return filtered_df.head(max_results)
+
+def display_similar_properties_table(similar_props_df):
+    """Display similar properties in a clean table format."""
+    if similar_props_df.empty:
+        st.info("No similar properties found in this zip code.")
+        return
+    
+    # Select key columns for display
+    display_columns = [
+        'Property Type', 'Total Acreage', 'Sidewalk Acreage', 
+        'SubContractor Price Per Acre', 'Complexity (1-5)', 
+        'Avg Snowfall (3-Year)', 'Property Region (When Bid)'
+    ]
+    
+    # Filter to available columns
+    available_columns = [col for col in display_columns if col in similar_props_df.columns]
+    display_df = similar_props_df[available_columns].copy()
+    
+    # Format the price column
+    if 'SubContractor Price Per Acre' in display_df.columns:
+        display_df['SubContractor Price Per Acre'] = display_df['SubContractor Price Per Acre'].apply(
+            lambda x: f"${x:,.2f}" if pd.notnull(x) else "N/A"
+        )
+    
+    # Format acreage columns
+    for col in ['Total Acreage', 'Sidewalk Acreage']:
+        if col in display_df.columns:
+            display_df[col] = display_df[col].apply(
+                lambda x: f"{x:.2f}" if pd.notnull(x) else "N/A"
+            )
+    
+    st.dataframe(display_df, use_container_width=True)
+
+def create_price_comparison_chart(similar_props_df, predicted_price):
+    """Create a chart comparing predicted price with similar properties."""
+    if similar_props_df.empty or 'SubContractor Price Per Acre' not in similar_props_df.columns:
+        return None
+    
+    # Remove any NaN values
+    clean_df = similar_props_df.dropna(subset=['SubContractor Price Per Acre', 'Total Acreage'])
+    
+    if clean_df.empty:
+        return None
+    
+    fig = go.Figure()
+    
+    # Add similar properties as scatter plot
+    fig.add_trace(go.Scatter(
+        x=clean_df['Total Acreage'],
+        y=clean_df['SubContractor Price Per Acre'],
+        mode='markers',
+        name='Similar Properties',
+        marker=dict(size=10, color='lightblue', line=dict(width=2, color='darkblue')),
+        hovertemplate='<b>Acreage:</b> %{x:.2f}<br><b>Price/Acre:</b> $%{y:,.2f}<extra></extra>'
+    ))
+    
+    # Add predicted price as a horizontal line
+    fig.add_hline(
+        y=predicted_price, 
+        line_dash="dash", 
+        line_color="red",
+        annotation_text=f"Predicted: ${predicted_price:,.2f}/acre",
+        annotation_position="top right"
+    )
+    
+    fig.update_layout(
+        title="Price Comparison: Predicted vs Similar Properties",
+        xaxis_title="Total Acreage",
+        yaxis_title="SubContractor Price Per Acre ($)",
+        showlegend=True,
+        height=400
+    )
+    
+    return fig
+
+def calculate_market_statistics(similar_props_df):
+    """Calculate market statistics from similar properties."""
+    if similar_props_df.empty or 'SubContractor Price Per Acre' not in similar_props_df.columns:
+        return None
+    
+    prices = similar_props_df['SubContractor Price Per Acre'].dropna()
+    if len(prices) == 0:
+        return None
+    
+    stats = {
+        'count': len(prices),
+        'mean': prices.mean(),
+        'median': prices.median(),
+        'min': prices.min(),
+        'max': prices.max(),
+        'std': prices.std() if len(prices) > 1 else 0
+    }
+    
+    return stats
 
 # Streamlit App Configuration
 st.set_page_config(
@@ -240,7 +369,7 @@ st.set_page_config(
 )
 
 # Main Title
-st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ Subcontractor Bid Pricing Tool (V2 - With Sidewalk Acreage)</h1>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ Subcontractor Bid Pricing Tool (V2 - With Market Comparison)</h1>', unsafe_allow_html=True)
 
 # Sidebar for Input Parameters
 st.sidebar.header("Property Details")
@@ -311,6 +440,39 @@ complexity_multiplier = st.sidebar.slider(
     step=0.1,
     help="Percentage increase per complexity level"
 ) / 100
+
+# NEW: Market Comparison Section
+st.sidebar.header("Market Comparison")
+
+# Add zip code input
+zip_code = st.sidebar.text_input(
+    "Zip Code",
+    value="19464",  # Default zip code
+    help="Enter zip code to find similar properties in the area"
+)
+
+# Add dataset path input
+dataset_path = st.sidebar.text_input(
+    "Training Dataset Path",
+    value="data/NewFull.csv",
+    help="Path to your training dataset file"
+)
+
+# Add filter options
+comparison_property_type = st.sidebar.selectbox(
+    "Filter by Property Type",
+    options=["Any", "Retail", "Office", "Industrial", "Residential", "Medical", "Other"],
+    index=0,
+    help="Filter similar properties by type (optional)"
+)
+
+max_comparisons = st.sidebar.slider(
+    "Max Properties to Show",
+    min_value=5,
+    max_value=20,
+    value=10,
+    help="Maximum number of similar properties to display"
+)
 
 # Create property dataframe
 property_data = pd.DataFrame([{
@@ -394,10 +556,10 @@ with col2:
     🚶 Sidewalk: {sidewalk_acreage} acres ({sidewalk_percentage:.1f}%)<br>
     ❄️ Snowfall: {avg_snowfall}" (3-yr avg)<br>
     🔧 Complexity: Level {complexity}<br>
-    📈 Multiplier: {complexity_multiplier*100:.1f}% per level
+    📈 Multiplier: {complexity_multiplier*100:.1f}% per level<br>
+    📮 Zip Code: {zip_code}
     </div>
     """, unsafe_allow_html=True)
-
 
 # Markup Pricing Table
 st.header("Markup Pricing Options")
@@ -425,27 +587,144 @@ for i, markup in enumerate(markups):
 markup_df = pd.DataFrame(markup_data)
 st.dataframe(markup_df, use_container_width=True)
 
+# NEW: Market Comparison Analysis Section
+st.header("Market Comparison Analysis")
+
+# Load and filter similar properties
+training_data, data_loaded = load_training_dataset(dataset_path)
+
+if data_loaded and zip_code:
+    similar_properties = get_similar_properties(
+        training_data, 
+        zip_code, 
+        comparison_property_type if comparison_property_type != "Any" else None,
+        max_comparisons
+    )
+    
+    if not similar_properties.empty:
+        # Create tabs for different views
+        comparison_tab1, comparison_tab2, comparison_tab3 = st.tabs(
+            ["📊 Properties Table", "📈 Price Chart", "📋 Market Stats"]
+        )
+        
+        with comparison_tab1:
+            st.subheader(f"Similar Properties in Zip Code {zip_code}")
+            display_similar_properties_table(similar_properties)
+            
+            # Add download button for the filtered data
+            csv_data = similar_properties.to_csv(index=False)
+            st.download_button(
+                label="📥 Download Similar Properties Data",
+                data=csv_data,
+                file_name=f"similar_properties_{zip_code}.csv",
+                mime="text/csv"
+            )
+        
+        with comparison_tab2:
+            st.subheader("Price Comparison Chart")
+            price_chart = create_price_comparison_chart(similar_properties, final_price_per_acre)
+            if price_chart:
+                st.plotly_chart(price_chart, use_container_width=True)
+            else:
+                st.info("Chart unavailable - missing price data in similar properties.")
+        
+        with comparison_tab3:
+            st.subheader("Market Statistics")
+            market_stats = calculate_market_statistics(similar_properties)
+            
+            if market_stats:
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.metric("Properties Found", market_stats['count'])
+                    st.metric("Average Price/Acre", f"${market_stats['mean']:,.2f}")
+                
+                with col2:
+                    st.metric("Median Price/Acre", f"${market_stats['median']:,.2f}")
+                    st.metric("Price Range", f"${market_stats['min']:,.2f} - ${market_stats['max']:,.2f}")
+                
+                with col3:
+                    deviation = abs(final_price_per_acre - market_stats['mean'])
+                    deviation_pct = (deviation / market_stats['mean']) * 100 if market_stats['mean'] > 0 else 0
+                    st.metric(
+                        "Prediction vs Market Avg", 
+                        f"${deviation:,.2f}",
+                        f"{'+' if final_price_per_acre > market_stats['mean'] else '-'}{deviation_pct:.1f}%"
+                    )
+                
+                # Market position indicator
+                if market_stats['std'] > 0:
+                    if final_price_per_acre < market_stats['mean'] - market_stats['std']:
+                        position = "🟢 Below Market (Competitive)"
+                    elif final_price_per_acre > market_stats['mean'] + market_stats['std']:
+                        position = "🔴 Above Market (Premium)"
+                    else:
+                        position = "🟡 Within Market Range"
+                else:
+                    if final_price_per_acre < market_stats['mean']:
+                        position = "🟢 Below Market (Competitive)"
+                    elif final_price_per_acre > market_stats['mean']:
+                        position = "🔴 Above Market (Premium)"
+                    else:
+                        position = "🟡 At Market Average"
+                
+                st.markdown(f"**Market Position:** {position}")
+            else:
+                st.info("No price data available for market statistics.")
+    
+    else:
+        st.info(f"No properties found in zip code {zip_code} with the selected filters.")
+
+else:
+    if not zip_code:
+        st.info("Enter a zip code to see similar properties in the area.")
+    else:
+        st.warning("Training dataset could not be loaded. Check the dataset path in the sidebar.")
+
 # Instructions
 st.markdown("---")
 st.markdown("""
 
+### 💡 **New Features - Market Comparison:**
+- ✅ **Zip Code Filtering** to find properties in the same area
+- ✅ **Property Type Filtering** for more relevant comparisons  
+- ✅ **Interactive Price Charts** showing your prediction vs market data
+- ✅ **Market Statistics** including averages, ranges, and position analysis
+- ✅ **Data Export** functionality for further analysis
+- ✅ **Enhanced Property Summary** with zip code display
 
-### 💡 **New in Version 2:**
-- ✅ **Sidewalk Acreage** input field for more accurate pricing
-- ✅ **Sidewalk Impact Analysis** showing cost breakdown
-- ✅ **Enhanced feature engineering** with sidewalk-specific calculations
-- ✅ **Updated model compatibility** with sidewalkModel.pkl
+### 🔧 **Required Dataset Columns:**
+Your training dataset should include:
+- `Zip Code` - For geographic filtering (required)
+- `Property Type` - For property type filtering
+- `Total Acreage` - For size comparison
+- `Sidewalk Acreage` - For sidewalk comparison
+- `SubContractor Price Per Acre` - The key pricing data (required)
+- `Complexity (1-5)` - For complexity comparison
+- `Avg Snowfall (3-Year)` - For weather comparison
+- `Property Region (When Bid)` - For regional context
 
-### 🔧 **Model Features:**
-- Includes sidewalk acreage, sidewalk percentage, and log sidewalk acreage features
-- Complexity multiplier of 3% per level (adjustable)
-- Regional pricing adjustments
-- Property type considerations
+### 📊 **Usage Tips:**
+- **Green indicator** = Your prediction is competitively priced (below market average)
+- **Yellow indicator** = Your prediction is within normal market range  
+- **Red indicator** = Your prediction is above market (premium pricing)
+- Use the **Properties Table** to see detailed comparisons with actual contract prices
+- Use the **Price Chart** to visualize where your prediction sits relative to similar properties
+- **Download the data** to perform additional analysis in Excel or other tools
+- **Market Statistics** help you understand local pricing patterns and competition
 
-### 📊 **Important:**
-- **Sidewalk acreage** is typically much smaller than total acreage (e.g., 0.1-2.0 acres)
-- Green checkmark means your trained sidewalk model is being used
-- Orange warning means it's using the fallback calculation with sidewalk consideration
-- Sidewalk areas often require more intensive maintenance and may command higher per-acre rates
-""")
+### 🎯 **Market Analysis Benefits:**
+- **Validate ML predictions** against real market data from your area
+- **Identify pricing opportunities** by seeing local competition
+- **Adjust estimates** based on actual contract prices in the same zip code
+- **Build client confidence** by showing comparable properties and pricing
+- **Track market trends** over time as you accumulate more data
+
+### 🔍 **Troubleshooting:**
+- If no properties show up, verify the zip code format in your dataset
+- Ensure your training dataset has the required columns listed above
+- Check that the dataset path is correct and the file is accessible
+- Try different property type filters if results are limited
+- Consider expanding to nearby zip codes if data is sparse
+           """ )
 
