@@ -274,7 +274,7 @@ def display_similar_properties_table(similar_props_df):
     
     # Select key columns for display
     display_columns = [
-        'Property Type', 'Total Acreage', 'Sidewalk Acreage', 
+        'Customer', 'Property Type', 'Total Acreage', 'Sidewalk Acreage', 
         'SubContractor Price Per Acre', 'Complexity (1-5)', 
         'Avg Snowfall (3-Year)', 'Property Region (When Bid)'
     ]
