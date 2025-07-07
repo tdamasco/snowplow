@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
+import pgeocode
 
-import base64
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
@@ -228,7 +228,7 @@ def calculate_markup_prices(base_cost, markups=[0.15, 0.25, 0.35, 0.45]):
     return markup_prices
 
 # NEW FUNCTIONS FOR MARKET COMPARISON
-def load_training_dataset(dataset_path="NewFull.csv"):
+def load_training_dataset(dataset_path="data/NewFull.csv"):
     """Load the training dataset containing all properties under contract."""
     try:
         df = pd.read_csv(dataset_path)
@@ -237,8 +237,116 @@ def load_training_dataset(dataset_path="NewFull.csv"):
         st.error(f"Could not load training dataset: {str(e)}")
         return None, False
 
-def get_similar_properties(df, zip_code, property_type=None, max_results=10):
-    """Filter properties by zip code and optionally by property type."""
+def get_similar_properties(df, zip_code, property_type=None, total_acreage=None, max_results=10, radius_miles=25):
+    """
+    Filter properties by nearby zip codes, similar acreage (±35%), and optionally by property type.
+    Uses pgeocode to find properties within a specified radius.
+    """
+    if df is None:
+        return pd.DataFrame()
+    
+    # Convert zip_code to string and handle different formats
+    zip_code = str(zip_code).strip()
+    
+    # Ensure required columns exist
+    if 'Zip' not in df.columns:
+        st.warning("'Zip' column not found in dataset.")
+        return pd.DataFrame()
+    
+    if total_acreage is None:
+        st.warning("Total acreage not provided for similarity matching.")
+        return pd.DataFrame()
+    
+    try:
+        # Initialize pgeocode for US
+        nomi = pgeocode.Nominatim('us')
+        dist_calc = pgeocode.GeoDistance('us')
+        
+        # Get coordinates for the target zip code
+        target_location = nomi.query_postal_code(zip_code)
+        
+        if pd.isna(target_location.latitude) or pd.isna(target_location.longitude):
+            st.warning(f"Could not find coordinates for zip code {zip_code}. Falling back to exact match.")
+            return get_similar_properties_exact_zip(df, zip_code, property_type, max_results)
+        
+        df_copy = df.copy()
+        df_copy['Zip'] = df_copy['Zip'].astype(str).str.strip()
+        
+        # Remove rows with missing required data
+        df_copy = df_copy.dropna(subset=['Zip', 'Total Acreage'])
+        
+        # Calculate acreage similarity bounds (±35%)
+        acreage_lower = total_acreage * 0.65  # 35% below
+        acreage_upper = total_acreage * 1.35  # 35% above
+        
+        # Filter by acreage similarity first (faster)
+        acreage_filtered = df_copy[
+            (df_copy['Total Acreage'] >= acreage_lower) & 
+            (df_copy['Total Acreage'] <= acreage_upper)
+        ].copy()
+        
+        if acreage_filtered.empty:
+            st.info("No properties found with similar acreage (±35%).")
+            return pd.DataFrame()
+        
+        # Calculate distances for each property
+        distances = []
+        valid_indices = []
+        
+        for idx, row in acreage_filtered.iterrows():
+            try:
+                property_zip = str(row['Zip']).strip()
+                if property_zip and property_zip != 'nan':
+                    distance = dist_calc.query_postal_code(zip_code, property_zip)
+                    if not pd.isna(distance):
+                        # Convert km to miles
+                        distance_miles = distance * 0.621371
+                        if distance_miles <= radius_miles:
+                            distances.append(distance_miles)
+                            valid_indices.append(idx)
+            except Exception as e:
+                # Skip properties with invalid zip codes
+                continue
+        
+        if not valid_indices:
+            st.info(f"No properties found within {radius_miles} miles with similar acreage.")
+            return pd.DataFrame()
+        
+        # Create filtered dataframe with distances
+        nearby_filtered = acreage_filtered.loc[valid_indices].copy()
+        nearby_filtered['Distance_Miles'] = distances
+        
+        # Optionally filter by property type
+        if property_type and property_type != "Any":
+            if 'Property Type' in nearby_filtered.columns:
+                nearby_filtered = nearby_filtered[nearby_filtered['Property Type'] == property_type]
+        
+        if nearby_filtered.empty:
+            st.info("No properties found matching all criteria.")
+            return pd.DataFrame()
+        
+        # Sort by distance first, then by price for consistency
+        if 'SubContractor Price Per Acre' in nearby_filtered.columns:
+            nearby_filtered = nearby_filtered.sort_values(['Distance_Miles', 'SubContractor Price Per Acre'])
+        else:
+            nearby_filtered = nearby_filtered.sort_values('Distance_Miles')
+        
+        return nearby_filtered.head(max_results)
+        
+    except ImportError:
+        st.error("pgeocode library not found. Please install it with: pip install pgeocode")
+        st.info("Falling back to exact zip code matching...")
+        return get_similar_properties_exact_zip(df, zip_code, property_type, max_results)
+    
+    except Exception as e:
+        st.warning(f"Error with geographic search: {str(e)}. Falling back to exact zip code matching.")
+        return get_similar_properties_exact_zip(df, zip_code, property_type, max_results)
+
+
+def get_similar_properties_exact_zip(df, zip_code, property_type=None, max_results=10):
+    """
+    Fallback function for exact zip code matching (original functionality).
+    """
     if df is None:
         return pd.DataFrame()
     
@@ -268,17 +376,21 @@ def get_similar_properties(df, zip_code, property_type=None, max_results=10):
     return filtered_df.head(max_results)
 
 def display_similar_properties_table(similar_props_df):
-    """Display similar properties in a clean table format."""
+    """Display similar properties in a clean table format with distance information."""
     if similar_props_df.empty:
-        st.info("No similar properties found in this zip code.")
+        st.info("No similar properties found with the current criteria.")
         return
     
     # Select key columns for display
     display_columns = [
         'Customer', 'Property Type', 'Total Acreage', 'Sidewalk Acreage', 
         'SubContractor Price Per Acre', 'Complexity (1-5)', 
-        'Avg Snowfall (3-Year)', 'Property Region (When Bid)'
+        'Avg Snowfall (3-Year)', 'Property Region (When Bid)', 'Zip'
     ]
+    
+    # Add distance if available
+    if 'Distance_Miles' in similar_props_df.columns:
+        display_columns.append('Distance_Miles')
     
     # Filter to available columns
     available_columns = [col for col in display_columns if col in similar_props_df.columns]
@@ -296,6 +408,14 @@ def display_similar_properties_table(similar_props_df):
             display_df[col] = display_df[col].apply(
                 lambda x: f"{x:.2f}" if pd.notnull(x) else "N/A"
             )
+    
+    # Format distance column
+    if 'Distance_Miles' in display_df.columns:
+        display_df['Distance_Miles'] = display_df['Distance_Miles'].apply(
+            lambda x: f"{x:.1f} mi" if pd.notnull(x) else "N/A"
+        )
+        # Rename for better display
+        display_df = display_df.rename(columns={'Distance_Miles': 'Distance'})
     
     st.dataframe(display_df, use_container_width=True)
 
@@ -369,51 +489,10 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Load and encode image in base64
-def get_base64_image(image_path):
-    with open(image_path, "rb") as f:
-        image_bytes = f.read()
-    return base64.b64encode(image_bytes).decode()
+# In your sidebar
 
-# Apply custom CSS
-st.markdown("""
-<style>
-    .logo-container {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 999;
-        background: white;
-        padding: 5px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .logo-container img {
-        height: 60px;
-        width: auto;
-    }
-</style>
-""", unsafe_allow_html=True)
 
-# Display logo
-logo_path = "logo.png"  # Make sure this is in the same directory or provide the full path
-if os.path.exists(logo_path):
-    encoded = get_base64_image(logo_path)
-    st.markdown(f"""
-    <div class="logo-container">
-        <img src="data:image/png;base64,{encoded}" alt="GSC Logo">
-    </div>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-    <div class="logo-container">
-        <div style="padding: 10px; background: #2E86AB; color: white; font-weight: bold; border-radius: 5px;">
-            GSC<br>
-            <small>Glenhaven Snow<br>Company, LLC</small>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-#Main Title
+# Main Title
 st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ Subcontractor Bid Pricing Tool (V2 - With Market Comparison)</h1>', unsafe_allow_html=True)
 
 # Sidebar for Input Parameters
@@ -499,7 +578,7 @@ zip_code = st.sidebar.text_input(
 # Add dataset path input
 dataset_path = st.sidebar.text_input(
     "Training Dataset Path",
-    value="NewFull.csv",
+    value="data/NewFull.csv",
     help="Path to your training dataset file"
 )
 
@@ -509,6 +588,23 @@ comparison_property_type = st.sidebar.selectbox(
     options=["Any", "Retail", "Office", "Industrial", "Residential", "Medical", "Other"],
     index=0,
     help="Filter similar properties by type (optional)"
+)
+
+# Add search radius input
+search_radius = st.sidebar.slider(
+    "Search Radius (miles)",
+    min_value=5,
+    max_value=50,
+    value=25,
+    step=5,
+    help="Find properties within this distance from the target zip code"
+)
+
+# Add acreage similarity toggle
+use_acreage_filter = st.sidebar.checkbox(
+    "Filter by Similar Acreage (±35%)",
+    value=True,
+    help="Only show properties with acreage within 35% of your property size"
 )
 
 max_comparisons = st.sidebar.slider(
@@ -639,12 +735,26 @@ st.header("Market Comparison Analysis")
 training_data, data_loaded = load_training_dataset(dataset_path)
 
 if data_loaded and zip_code:
-    similar_properties = get_similar_properties(
-        training_data, 
-        zip_code, 
-        comparison_property_type if comparison_property_type != "Any" else None,
-        max_comparisons
-    )
+    # Use the enhanced geographic search with acreage filtering
+    if use_acreage_filter:
+        similar_properties = get_similar_properties(
+            training_data, 
+            zip_code, 
+            comparison_property_type if comparison_property_type != "Any" else None,
+            total_acreage,  # Pass the acreage for similarity matching
+            max_comparisons,
+            search_radius
+        )
+    else:
+        # Use geographic search without acreage filtering
+        similar_properties = get_similar_properties(
+            training_data, 
+            zip_code, 
+            comparison_property_type if comparison_property_type != "Any" else None,
+            None,  # No acreage filtering
+            max_comparisons,
+            search_radius
+        )
     
     if not similar_properties.empty:
         # Create tabs for different views
@@ -653,7 +763,16 @@ if data_loaded and zip_code:
         )
         
         with comparison_tab1:
-            st.subheader(f"Similar Properties in Zip Code {zip_code}")
+            # Display search criteria summary
+            search_summary = f"**Search Results:** Properties within {search_radius} miles of {zip_code}"
+            if use_acreage_filter:
+                acreage_range = f"{total_acreage * 0.65:.1f} - {total_acreage * 1.35:.1f} acres"
+                search_summary += f" with similar acreage ({acreage_range})"
+            if comparison_property_type != "Any":
+                search_summary += f" of type: {comparison_property_type}"
+            
+            st.markdown(search_summary)
+            st.subheader(f"Similar Properties Near Zip Code {zip_code}")
             display_similar_properties_table(similar_properties)
             
             # Add download button for the filtered data
@@ -661,7 +780,7 @@ if data_loaded and zip_code:
             st.download_button(
                 label="📥 Download Similar Properties Data",
                 data=csv_data,
-                file_name=f"similar_properties_{zip_code}.csv",
+                file_name=f"similar_properties_{zip_code}_{search_radius}mi.csv",
                 mime="text/csv"
             )
         
@@ -718,7 +837,7 @@ if data_loaded and zip_code:
                 st.info("No price data available for market statistics.")
     
     else:
-        st.info(f"No properties found in zip code {zip_code} with the selected filters.")
+        st.info(f"No properties found within {search_radius} miles of zip code {zip_code} with the selected criteria.")
 
 else:
     if not zip_code:
@@ -730,24 +849,48 @@ else:
 st.markdown("---")
 st.markdown("""
 
-### 💡 **New Features - Market Comparison:**
-- ✅ **Zip Code Filtering** to find properties in the same area
+️
+
+### 💡 **Enhanced Geographic Market Comparison:**
+- ✅ **Geographic Radius Search** - Find properties within 5-50 miles of your target zip code
+- ✅ **Smart Acreage Filtering** - Optional ±35% acreage similarity matching
+- ✅ **Distance Display** - See exactly how far each comparable property is located
+- ✅ **Fallback Protection** - Automatically falls back to exact zip matching if pgeocode fails
 - ✅ **Property Type Filtering** for more relevant comparisons  
 - ✅ **Interactive Price Charts** showing your prediction vs market data
 - ✅ **Market Statistics** including averages, ranges, and position analysis
-- ✅ **Data Export** functionality for further analysis
-- ✅ **Enhanced Property Summary** with zip code display
+- ✅ **Data Export** functionality for further analysis with distance information
+
+### 🔧 **Installation Requirements:**
+To use the enhanced geographic features, install pgeocode:
+```bash
+pip install pgeocode
+```
+If pgeocode is not available, the app automatically falls back to exact zip code matching.
 
 ### 🔧 **Required Dataset Columns:**
 Your training dataset should include:
-- `Zip Code` - For geographic filtering (required)
+- `Zip` - For geographic filtering (required)
 - `Property Type` - For property type filtering
-- `Total Acreage` - For size comparison
+- `Total Acreage` - For size comparison and similarity matching
 - `Sidewalk Acreage` - For sidewalk comparison
 - `SubContractor Price Per Acre` - The key pricing data (required)
 - `Complexity (1-5)` - For complexity comparison
 - `Avg Snowfall (3-Year)` - For weather comparison
 - `Property Region (When Bid)` - For regional context
+
+### 📊 **New Search Features:**
+- **Search Radius**: Choose 5-50 mile radius around your target zip code
+- **Acreage Similarity**: Toggle ±35% acreage filtering on/off
+- **Distance Information**: See how far each comparable property is from your location
+- **Smart Sorting**: Results sorted by distance first, then by price
+
+### 🎯 **Market Analysis Benefits:**
+- **Larger Data Pool** - Find more comparable properties in nearby areas
+- **Geographic Context** - Understand pricing variations across your service area
+- **Size-Similar Properties** - Compare with properties of similar scale and complexity
+- **Distance-Aware Pricing** - See how distance affects pricing in your market
+- **Route Planning** - Use distance data for service delivery optimization
 
 ### 📊 **Usage Tips:**
 - **Green indicator** = Your prediction is competitively priced (below market average)
@@ -772,4 +915,3 @@ Your training dataset should include:
 - Try different property type filters if results are limited
 - Consider expanding to nearby zip codes if data is sparse
            """ )
-
