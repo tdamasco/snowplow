@@ -7,4 +7,3 @@ plotly
 xgboost
 lightgbm
 matplotlib
-base64
