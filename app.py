@@ -504,7 +504,7 @@ st.set_page_config(
 
 
 # Main Title
-st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ Subcontractor Bid Pricing Tool (V2 - With Market Comparison)</h1>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ GSC Subcontractor Bid Pricing Tool (V4 - With Market Triangulation)</h1>', unsafe_allow_html=True)
 
 # Sidebar for Input Parameters
 st.sidebar.header("Property Details")
