@@ -503,6 +503,10 @@ st.set_page_config(
 
 
 
+# Center the logo using columns
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image("logo.png", width=300)
 # Main Title
 st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ GSC Subcontractor Bid Pricing Tool (V4 - With Market Triangulation)</h1>', unsafe_allow_html=True)
 
