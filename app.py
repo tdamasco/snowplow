@@ -228,7 +228,7 @@ def calculate_markup_prices(base_cost, markups=[0.15, 0.25, 0.35, 0.45]):
     return markup_prices
 
 # NEW FUNCTIONS FOR MARKET COMPARISON
-def load_training_dataset(dataset_path="data/NewFull.csv"):
+def load_training_dataset(dataset_path="NewFull.csv"):
     """Load the training dataset containing all properties under contract."""
     try:
         df = pd.read_csv(dataset_path)
@@ -578,7 +578,7 @@ zip_code = st.sidebar.text_input(
 # Add dataset path input
 dataset_path = st.sidebar.text_input(
     "Training Dataset Path",
-    value="data/NewFull.csv",
+    value="NewFull.csv",
     help="Path to your training dataset file"
 )
 
