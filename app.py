@@ -227,7 +227,7 @@ def calculate_markup_prices(base_cost, markups=[0.15, 0.25, 0.35, 0.45]):
     return markup_prices
 
 # NEW FUNCTIONS FOR MARKET COMPARISON
-def load_training_dataset(dataset_path="data/NewFull.csv"):
+def load_training_dataset(dataset_path="NewFull.csv"):
     """Load the training dataset containing all properties under contract."""
     try:
         df = pd.read_csv(dataset_path)
@@ -368,60 +368,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for logo positioning
-st.markdown("""
-<style>
-    .logo-container {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 999;
-        background: white;
-        padding: 5px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .logo-container img {
-        height: 60px;
-        width: auto;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# Logo in top-right corner
-# Note: You'll need to upload your logo image to your Streamlit app directory
-# and reference it correctly. For now, I'll show you the structure:
-try:
-    # Try to load and display the logo
-    # Replace 'logo.png' with your actual logo file path
-    logo_path = "snowplow/logo.png"  # Update this path to your logo file
-    if os.path.exists(logo_path):
-        st.markdown(f"""
-        <div class="logo-container">
-            <img src="data:image/png;base64,{logo_path}" alt="GSC Logo">
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        # If logo file doesn't exist, show a placeholder
-        st.markdown("""
-        <div class="logo-container">
-            <div style="padding: 10px; background: #2E86AB; color: white; font-weight: bold; border-radius: 5px;">
-                GSC<br>
-                <small>Glenhaven Snow<br>Company, LLC</small>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-except:
-    # Fallback text logo
-    st.markdown("""
-    <div class="logo-container">
-        <div style="padding: 10px; background: #2E86AB; color: white; font-weight: bold; border-radius: 5px;">
-            GSC<br>
-            <small>Glenhaven Snow<br>Company, LLC</small>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
 # Main Title
 st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ Subcontractor Bid Pricing Tool (V2 - With Market Comparison)</h1>', unsafe_allow_html=True)
 
@@ -508,7 +454,7 @@ zip_code = st.sidebar.text_input(
 # Add dataset path input
 dataset_path = st.sidebar.text_input(
     "Training Dataset Path",
-    value="data/NewFull.csv",
+    value="NewFull.csv",
     help="Path to your training dataset file"
 )
 
@@ -739,8 +685,6 @@ else:
 st.markdown("---")
 st.markdown("""
 
-️
-
 ### 💡 **New Features - Market Comparison:**
 - ✅ **Zip Code Filtering** to find properties in the same area
 - ✅ **Property Type Filtering** for more relevant comparisons  
@@ -783,3 +727,4 @@ Your training dataset should include:
 - Try different property type filters if results are limited
 - Consider expanding to nearby zip codes if data is sparse
            """ )
+
