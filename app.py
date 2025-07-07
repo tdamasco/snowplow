@@ -393,7 +393,7 @@ st.markdown("""
 try:
     # Try to load and display the logo
     # Replace 'logo.png' with your actual logo file path
-    logo_path = "snowplow/logo.png"  # Update this path to your logo file
+    logo_path = "logo.png"  # Update this path to your logo file
     if os.path.exists(logo_path):
         st.markdown(f"""
         <div class="logo-container">
