@@ -253,9 +253,11 @@ def get_similar_properties(df, zip_code, property_type=None, total_acreage=None,
         st.warning("'Zip' column not found in dataset.")
         return pd.DataFrame()
     
-    if total_acreage is None:
-        st.warning("Total acreage not provided for similarity matching.")
-        return pd.DataFrame()
+    # Debug: Show what acreage we're using for matching
+    if total_acreage is not None:
+        st.info(f"🔍 Searching for properties with acreage between {total_acreage * 0.65:.1f} - {total_acreage * 1.35:.1f} acres (±35% of {total_acreage} acres)")
+    else:
+        st.info("🔍 Searching for properties without acreage filtering")
     
     try:
         # Initialize pgeocode for US
@@ -273,21 +275,28 @@ def get_similar_properties(df, zip_code, property_type=None, total_acreage=None,
         df_copy['Zip'] = df_copy['Zip'].astype(str).str.strip()
         
         # Remove rows with missing required data
-        df_copy = df_copy.dropna(subset=['Zip', 'Total Acreage'])
+        df_copy = df_copy.dropna(subset=['Zip'])
         
-        # Calculate acreage similarity bounds (±35%)
-        acreage_lower = total_acreage * 0.65  # 35% below
-        acreage_upper = total_acreage * 1.35  # 35% above
-        
-        # Filter by acreage similarity first (faster)
-        acreage_filtered = df_copy[
-            (df_copy['Total Acreage'] >= acreage_lower) & 
-            (df_copy['Total Acreage'] <= acreage_upper)
-        ].copy()
-        
-        if acreage_filtered.empty:
-            st.info("No properties found with similar acreage (±35%).")
-            return pd.DataFrame()
+        # Only filter by acreage if total_acreage is provided and acreage filtering is enabled
+        if total_acreage is not None:
+            df_copy = df_copy.dropna(subset=['Total Acreage'])
+            
+            # Calculate acreage similarity bounds (±35%)
+            acreage_lower = total_acreage * 0.65  # 35% below
+            acreage_upper = total_acreage * 1.35  # 35% above
+            
+            # Filter by acreage similarity first (faster)
+            acreage_filtered = df_copy[
+                (df_copy['Total Acreage'] >= acreage_lower) & 
+                (df_copy['Total Acreage'] <= acreage_upper)
+            ].copy()
+            
+            if acreage_filtered.empty:
+                st.info(f"No properties found with similar acreage ({acreage_lower:.1f} - {acreage_upper:.1f} acres) within the dataset.")
+                return pd.DataFrame()
+        else:
+            # No acreage filtering
+            acreage_filtered = df_copy.copy()
         
         # Calculate distances for each property
         distances = []
@@ -309,7 +318,10 @@ def get_similar_properties(df, zip_code, property_type=None, total_acreage=None,
                 continue
         
         if not valid_indices:
-            st.info(f"No properties found within {radius_miles} miles with similar acreage.")
+            if total_acreage is not None:
+                st.info(f"No properties found within {radius_miles} miles with similar acreage ({total_acreage * 0.65:.1f} - {total_acreage * 1.35:.1f} acres).")
+            else:
+                st.info(f"No properties found within {radius_miles} miles of zip code {zip_code}.")
             return pd.DataFrame()
         
         # Create filtered dataframe with distances
@@ -489,7 +501,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# In your sidebar
 
 
 # Main Title
@@ -746,7 +757,7 @@ if data_loaded and zip_code:
             search_radius
         )
     else:
-        # Use geographic search without acreage filtering
+        # Use geographic search without acreage filtering - pass None for total_acreage
         similar_properties = get_similar_properties(
             training_data, 
             zip_code, 
