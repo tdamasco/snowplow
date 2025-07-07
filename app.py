@@ -7,6 +7,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
+import base64
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
@@ -367,7 +368,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-# Custom CSS for logo positioning
+
+# Load and encode image in base64
+def get_base64_image(image_path):
+    with open(image_path, "rb") as f:
+        image_bytes = f.read()
+    return base64.b64encode(image_bytes).decode()
+
+# Apply custom CSS
 st.markdown("""
 <style>
     .logo-container {
@@ -387,31 +395,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Logo in top-right corner
-# Note: You'll need to upload your logo image to your Streamlit app directory
-# and reference it correctly. For now, I'll show you the structure:
-try:
-    # Try to load and display the logo
-    # Replace 'logo.png' with your actual logo file path
-    logo_path = "logo.png"  # Update this path to your logo file
-    if os.path.exists(logo_path):
-        st.markdown(f"""
-        <div class="logo-container">
-            <img src="data:image/png;base64,{logo_path}" alt="GSC Logo">
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        # If logo file doesn't exist, show a placeholder
-        st.markdown("""
-        <div class="logo-container">
-            <div style="padding: 10px; background: #2E86AB; color: white; font-weight: bold; border-radius: 5px;">
-                GSC<br>
-                <small>Glenhaven Snow<br>Company, LLC</small>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-except:
-    # Fallback text logo
+# Display logo
+logo_path = "logo.png"  # Make sure this is in the same directory or provide the full path
+if os.path.exists(logo_path):
+    encoded = get_base64_image(logo_path)
+    st.markdown(f"""
+    <div class="logo-container">
+        <img src="data:image/png;base64,{encoded}" alt="GSC Logo">
+    </div>
+    """, unsafe_allow_html=True)
+else:
     st.markdown("""
     <div class="logo-container">
         <div style="padding: 10px; background: #2E86AB; color: white; font-weight: bold; border-radius: 5px;">
@@ -420,7 +413,7 @@ except:
         </div>
     </div>
     """, unsafe_allow_html=True)
-# Main Title
+#Main Title
 st.markdown('<h1 style="text-align: center; color: #2E86AB;">❄️ Subcontractor Bid Pricing Tool (V2 - With Market Comparison)</h1>', unsafe_allow_html=True)
 
 # Sidebar for Input Parameters
