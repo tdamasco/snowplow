@@ -872,12 +872,6 @@ st.markdown("""
 - ✅ **Market Statistics** including averages, ranges, and position analysis
 - ✅ **Data Export** functionality for further analysis with distance information
 
-### 🔧 **Installation Requirements:**
-To use the enhanced geographic features, install pgeocode:
-```bash
-pip install pgeocode
-```
-If pgeocode is not available, the app automatically falls back to exact zip code matching.
 
 ### 🔧 **Required Dataset Columns:**
 Your training dataset should include:
@@ -896,21 +890,6 @@ Your training dataset should include:
 - **Distance Information**: See how far each comparable property is from your location
 - **Smart Sorting**: Results sorted by distance first, then by price
 
-### 🎯 **Market Analysis Benefits:**
-- **Larger Data Pool** - Find more comparable properties in nearby areas
-- **Geographic Context** - Understand pricing variations across your service area
-- **Size-Similar Properties** - Compare with properties of similar scale and complexity
-- **Distance-Aware Pricing** - See how distance affects pricing in your market
-- **Route Planning** - Use distance data for service delivery optimization
-
-### 📊 **Usage Tips:**
-- **Green indicator** = Your prediction is competitively priced (below market average)
-- **Yellow indicator** = Your prediction is within normal market range  
-- **Red indicator** = Your prediction is above market (premium pricing)
-- Use the **Properties Table** to see detailed comparisons with actual contract prices
-- Use the **Price Chart** to visualize where your prediction sits relative to similar properties
-- **Download the data** to perform additional analysis in Excel or other tools
-- **Market Statistics** help you understand local pricing patterns and competition
 
 ### 🎯 **Market Analysis Benefits:**
 - **Validate ML predictions** against real market data from your area
