@@ -228,7 +228,7 @@ def calculate_markup_prices(base_cost, markups=[0.15, 0.25, 0.35, 0.45]):
     return markup_prices
 
 # NEW FUNCTIONS FOR MARKET COMPARISON
-def load_training_dataset(dataset_path="NewFull.csv"):
+def load_training_dataset(dataset_path="SubFull.csv"):
     """Load the training dataset containing all properties under contract."""
     try:
         df = pd.read_csv(dataset_path)
@@ -395,7 +395,7 @@ def display_similar_properties_table(similar_props_df):
     
     # Select key columns for display
     display_columns = [
-        'Customer', 'Property Type', 'Total Acreage', 'Sidewalk Acreage', 
+        'Customer', 'SubContractor', 'Property Type', 'Total Acreage', 'Sidewalk Acreage', 
         'SubContractor Price Per Acre', 'Complexity (1-5)', 'Zip'
     ]
     
@@ -592,7 +592,7 @@ zip_code = st.sidebar.text_input(
 # Add dataset path input
 dataset_path = st.sidebar.text_input(
     "Training Dataset Path",
-    value="NewFull.csv",
+    value="SubFull.csv",
     help="Path to your training dataset file"
 )
 
