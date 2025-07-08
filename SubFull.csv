@@ -1,0 +1,186 @@
+﻿Customer,HQ Region ,Property,Property Region (When Bid),Property Type,Complexity (1-5),Total Acreage,Address,City,State,Zip,Avg Snowfall (3-Year),SubContractor Price Per Acre,Sidewalk Acreage,SubContractor
+Brixmor Property Group,Central,Middletown Plaza,East,Retail,3,10.82,1425 NJ-35,Middletown ,NJ,07748,10.3,6010,0.7,Native
+Brixmor Property Group,Central,Collegetown Shopping Center,Philly Metro,Retail,3,14.56,731 Delsea Dr,Glassboro ,NJ,08028,8.5,4258,0.76,Chapman
+Wolf Commercial Real Estate (WCRE),Philly Metro,999 Route 73,Philly Metro,Medical,2,2.76,999 Route 73,Marlton,NJ,08053,9.1,6521,0.08,N/A
+"Seyon Management, LLC",National,824 East Gate ,Philly Metro,Office,1,1.57,824 East Gate Drive,Mount Laurel,NJ,08054,9.1,9652,0.05,Chapman
+Wolfson Group Inc.,Central,Audubon Crossings,Philly Metro,Retail,2,23.56,130 Blackhorse Pk,Audubon,NJ,08106,9.1,2939,1.23,N/A
+Acadia Realty Trust,National,Marketplace of Absecon,East,Retail,3,8.18,636-682 White Horse Pike,Absecon,NJ,08201,8.1,4875,0.48,DeMarco
+Wolfson Group Inc.,Central,Oak Tree Plaza,East,Retail,2,17.5,6801 Black Horse Pk,Egg Harbor Twp,NJ,08234,8.3,4000,0.3,N/A
+Brixmor Property Group,Central,Rio Grande Plaza,National ,Retail,1,7.72,1500 S Route 47,Rio Grande,NJ,08242,8.6,4262,0.3,DeMarco
+Brixmor Property Group,Central,Ocean Heights Plaza,East,Retail,4,12.73,319 New Rd,Somers Point,NJ,08244,8.2,3848,1.31,DeMarco
+Wolf Commercial Real Estate (WCRE),Philly Metro,76 West Landis,East,Retail,1,2.54,76 West Landis Ave ,Vineland,NJ,08360,8,5896,0.28,DeMarco
+Jones Lang LaSalle (JLL),Philly Metro,Mercer HRP Logistics Park (Lamberton),Philly Metro,Industrial,3,31.22,1365 Lamberton Rd,Hamilton Twp,NJ,08611,9,3980,0.43,Prime Design
+Brixmor Property Group,Central,Old Bridge Gateway,National ,Retail,4,13.97,1000-1074 Route 9,Old Bridge,NJ,08857,11.1,6409,0.51,Native
+Denholtz Properties,East,1550 Valley Center Pkwy,North,Industrial,1,1.57,1550 Valley Center Pkwy,Bethlehem ,PA,18017,18.2,10202,0.14,Lawn and Land
+Denholtz Properties,East,1560 Valley Center Pkwy,North,Industrial,1,1.76,1560 Valley Center Pkwy,Bethlehem ,PA,18017,18.2,10803,0.13,Lawn and Land
+Brixmor Property Group,Central,Lehigh Shopping Center,North,Retail,3,22.95,2100-2184 W Union Blvd,Bethlehem,PA,18018,18.3,4836,0.92,Lawn and Land
+Brixmor Property Group,Central,Whitehall Square,North,Retail,3,16.75,2180 MacArthur Rd,Whitehall,PA,18052,18.6,4477,0.87,Lawn and Land
+Denholtz Properties,East,2201 Hangar Place,North,Industrial,1,1.31,2201 Hangar Place,Allentown ,PA,18109,18.3,9877,0.04,Lawn and Land
+Denholtz Properties,East,2202 Hangar Place,North,Industrial,1,1.19,2202 Hangar Place,Allentown ,PA,18109,18.3,9768,0.03,Lawn and Land
+Denholtz Properties,East,754 Roble Road,North,Industrial,1,1.23,754 Roble Road,Allentown ,PA,18109,18.3,9751,0.03,Lawn and Land
+Denholtz Properties,East,944 Marcon Blvd,North,Industrial,1,1.43,944 Marcon Blvd,Allentown ,PA,18109,18.3,9748,0.05,Lawn and Land
+Denholtz Properties,East,954 Marcon Blvd,North,Industrial,1,1.88,954 Marcon Blvd,Allentown ,PA,18109,18.3,9749,0.03,Lawn and Land
+Denholtz Properties,East,964 Marcon Blvd,North,Industrial,1,1.31,964 Marcon Blvd,Allentown ,PA,18109,18.3,9749,0.04,Lawn and Land
+Denholtz Properties,East,974 Marcon Blvd,North,Industrial,1,1.12,974 Marcon Blvd,Allentown ,PA,18109,18.3,9752,0.05,Lawn and Land
+Goodman Properties,Central,Airport Associates,North,Retail,4,35.82,910 Airport Center Rd,Allentown,PA ,18109,18.3,5277,1.88,Lawn and Land
+Goodman Properties,Central,Airport Point,North,Retail,1,0.74,1870 Airport Rd,Allentown,PA ,18109,18.3,8513,0.11,Lawn and Land
+Goodman Properties,Central,Skyline Realty Partners LP,Central,Retail,1,2.43,280 West Butler Pike,Chalfont,PA,18914,13.4,4502,0.19,KD
+Brixmor Property Group,Central,Village at Newtown ,Central ,Retail,5,14.93,2800 S Eagle Rd,Newtown,PA,18940,10.9,7034,1.83,DeMarco
+American Development Co. (ADCO),Central,Quakertown Plaza,Central,Retail,2,15.8,1465 West Broad St,Quakertown,PA,18951,19.1,3481,0.45,KD
+Wolfson Group Inc.,Central,Richland Crossings ,Central,Retail,2,29.38,195 North West End Blvd,Quakertown,PA,18951,19.1,3234,1.15,N/A
+Grand View Health (GVH),Central,Grand View Hospital & Outpatient Center,Central,Medical,4,15.1,700 & 915 Lawn Ave ,Sellersville ,PA,18960,15.2,6888,0.83,KD
+Goodman Properties,Central,511 2nd Street Realty Partners ,Central,Retail,1,0.51,511 2nd Street Pike,Southampton,PA,18966,11.1,21594,0.05,JG
+Goodman Properties,Central,Roslyn Associates,Central,Retail,1,3.85,2350 Susquehanna Road,Abington,PA,19001,11,7530,0.27,Hernandez
+Cushman & Wakefield,Central,Spring House Innovation Park,Central,Flex,5,23.05,727 Norristown Rd,Lower Gwynedd,PA,19002,11.8,4921,2.8,Carbajal
+Goodman Properties,Central,Maverick Main Line,Central,Retail,1,0.96,101 W City Ave,Bala Cynwyd,PA ,19004,9.7,22967,0.16,Phil'z
+Goodman Properties,Central,Chesterman,Philly Metro,Retail,1,1.42,1919 W 9th St,Chester,PA,19013,7.4,9273,0.11,Phil'z
+"Merion Commercial Realty, Inc.",Philly Metro,Cambridge Square,Philly Metro,Retail,1,4.26,4811 Edgemont Ave,Brookhaven,PA,19015,8.5,8396,0.26,Phil'z
+Somerset Properties,Central,1100 Virginia Drive,Central,Office,4,27.66,1100 Virginia Drive,Fort Washington,PA,19034,11.2,3796,1.51,N/A
+Wolfson Group Inc.,Central,MacDade Mall,Philly Metro,Retail,1,11.59,2600 MacDade Blvd,Holmes,PA,19043,7.6,4485,0.69,N/A
+Goodman Properties,Central,Horsham Realty Partners,Central,Retail,1,6.7,100 Welsh Road,Horsham,PA,19044,11.6,6313,0.7,Greener Turf
+Goodman Properties,Central,Welsh Road Partners LLC; Chase Bank  ,Central,Retail,1,0.7,136 Welsh Road,Horsham,PA,19044,11.6,1486,0.12,Greener Turf
+Goodman Properties,Central,West Gate Realty Partners LP,Central,Retail,3,8.18,116-120 Welsh Road,Horsham,PA,19044,11.6,6269,0.48,Greener Turf
+Heffernan & Partners ,Central,Babylon Business Campus,Central,Flex,3,24.14,903 Sheehy Drive,Horsham,PA,19044,11.6,4557,0.87,Greener Turf
+Paramount Realty,West,Noble Town Center,Central,Retail,1,11.15,901 Old York Rd,Jenkintown,PA,19046,11,4483,0.65,N/A
+Goodman Properties,Central,Abington Crossing Associates,Central,Retail,1,2.16,2900 Moreland Rd,Willow Grove,PA,19090,11.4,9012,0.21,Hernandez
+Goodman Properties,Central,Good Mac Realty Partners LP,Central,Retail,2,17.6,3900 Welsh Road,Willow Grove,PA,19090,11.4,5453,1,Greener Turf
+Goodman Properties,Central,NBA Development,Central,Retail,1,0.76,2610 Moreland Rd,Willow Grove,PA,19090,11.4,15205,0.09,Hernandez
+Goodman Properties,Central,Regency Square,Central,Retail,1,3.63,1025 Easton Rd,Willow Grove,PA,19090,11.4,7170,0.2,Hernandez
+"Merion Commercial Realty, Inc.",Philly Metro,9920 Bustleton,Philly Metro,Retail,1,2.63,9920 Bustleton Ave,Philadelphia,PA,19115,9.4,8759,0.03,JG
+"Merion Commercial Realty, Inc.",Philly Metro,Alliance/SONO Condo Assn,Philly Metro,Retail,1,3.29,456 N 5th St,Philadelphia,PA,19123,7.9,18841,0.93,Chapman
+Brixmor Property Group,Central,Ivyridge,Philly Metro,Retail,1,4.99,7162 Ridge Ave,Philadelphia,PA,19128,10.2,9011,0.41,Carbajal
+Wolfson Group Inc.,Central,Aramingo Crossings,Philly Metro,Retail,2,13.94,3800 Aramingo Ave,Philadelphia,PA,19137,7.5,5021,1.21,N/A
+Paramount Realty,West,Columbus Crossing,Philly Metro,Retail,2,9.08,1851 S Columbus Blvd,Philadelphia,PA,19148,7.5,5504,0.36,Chapman
+"Merion Commercial Realty, Inc.",Philly Metro,Bells Corner,Philly Metro,Retail,1,2.97,8330 Bustleton Ave,Philadelphia,PA,19152,8.8,11794,0.53,JG
+"J. Loew Property Management, Inc.",West,Ashbridge Square,West,Retail,3,21.39,965 East Lancaster Ave,Downingtown,PA,19335,11.4,3178,1.46,Carbajal
+Management Assistance Group (MAG),West,Brandywine Village Shopping Center,West,Retail,1,5.92,1257 Horseshoe Pike,Downingtown,PA,19335,11.4,5912,0.3,Carbajal
+Bozzuto,National,Ashbridge at Exton Apartments,West,Residential,2,8.2,109 Commerce Dr,Exton,PA,19341,11.4,8963,1.39,N/A
+Wolfson Group Inc.,Central,Main Street at Exton,West,Retail,5,45.18,128 Woodcutter St,Exton,PA,19341,11.4,5312,5.06,N/A
+Goodman Properties,Central,Provco Pinegood Atwater LP,West,Retail,1,2.08,615-630 N Morehall Rd,Malvern ,PA,19355,12.7,6252,0.18,Carbajal
+Wolfson Group Inc.,Central,Oxford Commons,West,Retail,2,20.57,800 Commons Dr,Oxford,PA,19363,11.4,3403,0.67,N/A
+Wolfson Group Inc.,Central,West Sadsbury Commons,West,Retail,2,30.71,100 Commons Dr,Parkesburg,PA,19365,11.4,2768,1.25,N/A
+Goodman Properties,Central,Southmont/CVS (Norristown),Central,Retail,1,1.24,1200 W Main St,Norristown,PA ,19401,12,8074,0.13,Carbajal
+"Newmark Group, Inc.",Central,Norristown Centre,Central,Retail,2,12.56,1880 Markley St,Norristown,PA,19401,12,3982,0.76,Carbajal
+"Prayosha Inv. & Man. Co., Inc.",Central,Dunkin' Donuts Norristown,Central,Retail,1,0.5,450 W Johnson Hwy,Norristown,PA,19401,12,4000,0.02,Carbajal
+Goodman Properties,Central,Blue Star Henderson,Central,Retail,1,2.54,125 DeKalb Pike,King of Prussia,PA,19406,11.6,7099,0.13,Carbajal
+Goodman Properties,Central,Pennback Holdings LP,Central,Retail,1,1.04,860 Penllyn Blue Bell Pike,Blue Bell,PA,19422,11.7,12933,0.06,Hernandez
+Goodman Properties,Central,Whitpain Realty Associates,Central,Retail,1,2.16,1510 DeKalb Pike,Blue Bell,PA,19422,11.7,6247,0.11,Hernandez
+Wolfson Group Inc.,Central,Hilltown Crossings,Central,Retail,2,21.92,1515 Bethlehem Pk,Hatfield,PA,19440,14,2965,0.66,N/A
+Brixmor Property Group,Central,North Penn Marketplace,Central,Retail,2,7.63,1551 S Valley Forge Rd,Lansdale,PA,19446,12.9,4915,0.26,Hernandez
+Goodman Properties,Central,GK Evans (Residence Inn),Central,Residential,1,2.1,1100 Bethlehem Pike,North Wales,PA,19454,12.2,9546,0.23,KD
+Goodman Properties,Central,Gwynedd Crossing Shopping Center,Central,Retail,2,10.44,1210 Bethlehem Pike,North Wales,PA,19454,12.2,5745,0.73,KD
+Kahn & Company Real Estate,Central,Higher Rock,Central,Retail,1,1.15,1006 Bethlehem Pike,North Wales,PA,19454,12.2,9778,0.12,KD
+"MCB Property Management, LLC",National,Upland Square,Central,Retail,3,31.28,180 Upland Square Dr,Pottstown,PA,19464,13.7,3517,2.01,Backland
+Wolf Commercial Real Estate (WCRE),Philly Metro,400 Enterprise ,Central,Medical,1,1.61,400 Enterprise Drive ,Limerick ,PA,19468,13.7,9633,0.2,N/A
+Wolf Commercial Real Estate (WCRE),Philly Metro,475 Enterprise,Central,Medical,1,1.96,475 Enterprise Drive ,Limerick ,PA,19468,13.7,7891,0.21,N/A
+Management Assistance Group (MAG),West,Countyline Village Shopping Center,West,Retail,1,2.83,116 Countyline Rd,Boyertown,PA,19512,15,7078,0.15,Backland
+Wolfson Group Inc.,Central,Morgantown Crossings,West,Retail,2,22.09,100 Crossings Blvd,Elverson,PA,19520,13.7,3621,0.92,N/A
+Goodman Properties,Central,Woodmill Commons,West,Retail,1,6.01,1065 Woodland Rd,Wyomissing,PA,19610,14.5,6990,0.48,Backland
+"Allied Retail Properties, Inc.",National,Concord Gallery,National,Retail,1,4.78,3596-3662 Concord Pike,Talleyville,DE,19803,8.3,10167,0.34,N/A
+"Allied Retail Properties, Inc.",National,Concord North,National,Retail,1,9.18,4801-4807 Concord Pike,Talleyville,DE,19803,8.3,6880,0.18,Carbajal
+"Allied Retail Properties, Inc.",National,Merchant's Square,National,Retail,2,18.78,4301-4441 Governor Printz Blvd,Wilmington ,DE,19809,8.3,5527,0.81,N/A
+AmCap,National,The Shoppes at Brinton Lake,Philly Metro,Retail,3,10.61,951 Baltimore Pike,Glen Mills,PA,19342,8.5,5959,0.78,N/A
+"American Continental Properties, LLC",Philly Metro,Pennsville Marketplace,National,Retail ,1,6.34,709 Rte 49,Pennsville,NJ,08070,8.3,5990,0.23,N/A
+"American Continental Properties, LLC",Philly Metro,Pennsville Marketplace,National,Retail ,1,6.34,709 Rte 49,Pennsville,NJ,08070,8.3,6131,0.23,N/A
+"American Continental Properties, LLC",Philly Metro,Wishing Well Plaza,Philly Metro,Retail ,2,8.48,1817 Mount Holly Rd,Burlington,NJ,08016,8.9,4197,0.13,N/A
+"American Continental Properties, LLC",Philly Metro,Wishing Well Plaza,Philly Metro,Retail ,2,8.48,1817 Mount Holly Rd,Burlington,NJ,08016,8.9,4938,0.13,N/A
+"American Continental Properties, LLC",Philly Metro,Cumberland Crossing,National,Retail ,1,8.93,2231 N 2nd St,Millville,NJ,08332,8,4825,0.33,N/A
+"American Continental Properties, LLC",Philly Metro,Cumberland Crossing,National,Retail ,1,8.93,2231 N 2nd St,Millville,NJ,08332,8,5696,0.33,N/A
+"American Continental Properties, LLC",Philly Metro,Berlin Circle Plaza,Philly Metro,Retail ,4,16.37,200 Rte 73,West Berlin,NJ,08091,7.6,4021,0.79,N/A
+"American Continental Properties, LLC",Philly Metro,Berlin Circle Plaza,Philly Metro,Retail ,4,16.37,200 Rte 73,West Berlin,NJ,08091,7.6,4314,0.79,N/A
+Avir Realty Group,Central,2260-2270 Cabot Blvd,Central,Office,1,1.31,2260-2270 Cabot Blvd West,Langhorne,PA,19047,10.9,9684,0.06,N/A
+BC Property Management,Central,2137 Welsh Road,Philly Metro,Medical,1,0.76,2137 Welsh Rd,Philadelphia,PA,19115,9.4,16850,0.07,N/A
+BC Property Management,Central,2000 Grant Avenue,Philly Metro,Medical,1,0.79,2000 Grant Ave,Philadelphia,PA,19115,9.4,16361,0.04,N/A
+Bennett Williams Commercial,West,1205 Warren Ave ,Philly Metro,Retail,1,0.78,1205 Warren Ave ,Cherry Hill,NJ,08002,9.1,12850,0.05,N/A
+Brixmor Property Group,Central,Springfield Place,National ,Retail,1,2.08,727 Morris Turnpike,Springfield,NJ,07081,11.1,6031,0.08,N/A
+Brixmor Property Group,Central,Acme Clark,National ,Retail,1,3.09,Raritan Rd & Commerce Place,Clark,NJ,07006,11.1,7368,0.18,N/A
+Brixmor Property Group,Central,Tinton Falls Plaza,East,Retail,1,4.02,980 Shrewsbury Ave,Tinton Falls,NJ,07724,10.3,5579,0.12,N/A
+Brixmor Property Group,Central,Whitemarsh Shopping Center,Central,Retail,1,4.3,10 E Ridge Pike,Conshohocken,PA,19428,11.6,8356,0.25,N/A
+Brixmor Property Group,Central,Shops at Prospect,West,Retail,1,4.54,3985 Columbia Ave,Columbia,PA,17512,13.7,7910,0.18,N/A
+Brixmor Property Group,Central,Valley Fair,West,Retail,1,5.14,260 West Swedesford Rd,Devon,PA,19333,11.6,5122,0.28,N/A
+Brixmor Property Group,Central,Bennetts Mills Plaza,East,Retail,2,6.91,2275 W County Line Rd,Jackson,NJ,08527,10.3,5196,0.23,N/A
+Brixmor Property Group,Central,Collegeville Shopping Center,Central,Retail,1,7.5,731 Delsea Dr,Glassboro ,NJ,08028,8.5,5469,0.31,N/A
+Brixmor Property Group,Central,Plymouth Square,Central,Retail,1,8.5,20 Ridge Pike,Conshohocken,PA,19428,11.6,6614,0.78,N/A
+Brixmor Property Group,Central,County Line Plaza,Central,Retail,1,9.23,703 PA 113,Souderton,PA,18964,14,4536,0.39,N/A
+Brixmor Property Group,Central,Village West,North,Retail,2,9.38,3100 West Tilgham St,Allentown,PA,18104,18.3,6061,0.61,N/A
+Brixmor Property Group,Central,Shoppes At Valley Forge,Central,Retail,2,9.89,260 Schuylkill Road,Phoenixville,PA,19460,12.7,5142,0.8,N/A
+Brixmor Property Group,Central,New Britain Village Square,Central,Retail,3,10.44,4275 County Line Rd,Chalfont,PA,18914,13.4,5128,0.66,N/A
+Brixmor Property Group,Central,Hamilton Plaza,Philly Metro,Retail,1,10.49,1005 White Horse Ave,Hamilton,NJ,08610,9,4563,0.28,N/A
+Brixmor Property Group,Central,Laurel Square,East,Retail,2,16.21,1930 Rte 88,Brick,NJ,08724,10.3,3507,0.49,N/A
+Brixmor Property Group,Central,Roosevelt Mall,Philly Metro,Retail,4,16.29,2329 Cottman Ave,Philadelphia,PA,19149,7.5,5327,2.34,N/A
+Brixmor Property Group,Central,Roosevelt Mall,Philly Metro,Retail,4,16.29,2329 Cottman Ave,Philadelphia,PA,19149,7.5,6613,2.34,N/A
+Brixmor Property Group,Central,Barn Plaza,Central,Retail,4,16.72,1745 S Easton Rd,Doylestown,PA,18901,13.4,3221,0.55,N/A
+Brixmor Property Group,Central,Whitehall Square,North,Retail,3,16.75,2180 MacArthur Rd,Whitehall,PA,18052,18.6,4286,0.87,N/A
+Brixmor Property Group,Central,Warminster Towne Center,Central,Retail,2,17.2,918-982 West Street Rd,Warminster,PA,18974,11.6,4523,0.79,N/A
+Brixmor Property Group,Central,Bristol Park,Central,Retail,3,20.39,100 Commerce Circle,Bristol,PA,19007,9.2,3962,1.02,N/A
+Centennial,National,MarketFair,Philly Metro,Retail,2,15.02,3535 US Highway 1,Princeton,NJ,08540,9,5378,0.85,N/A
+Centennial,National,The Promenade Shops at Saucon Valley,North,Retail,5,34.12,2845 Center Valley Parkway,Center Valley,PA,18034,18.3,9997,5.06,N/A
+Danella Realty,Central,1515 Dekalb Pike,Central,Medical,1,0.69,1515 Dekalb Pike,Blue Bell,PA,19422,11.7,13426,0.06,N/A
+Danella Realty,Central,Shoppes at Blue Bell Corner,Central,Retail,1,0.84,851-881 W Butler Pike,Ambler,PA,19002,11.8,11738,0.04,N/A
+Denholtz Properties,East,83 S Commerce Way,North,Industrial,1,0.6,83 S Commerce Way,Bethlehem ,PA,18017,18.2,9578,0.08,N/A
+Denholtz Properties,East,87 S Commerce Way,North,Industrial,1,0.81,87 S Commerce Way,Bethlehem ,PA,18017,18.2,9573,0.03,N/A
+Denholtz Properties,East,85 S Commerce Way,North,Industrial,1,0.84,85 S Commerce Way,Bethlehem ,PA,18017,18.2,9572,0.02,N/A
+Denholtz Properties,East,7562 Penn Drive,North,Industrial,1,1.12,7562 Penn Drive,Allentown ,PA,18106,18.3,9575,0.03,N/A
+Denholtz Properties,East,7355 William Ave,North,Industrial,1,1.4,7355 William Ave,Allentown ,PA,18106,18.3,9576,0.02,N/A
+Denholtz Properties,East,7277 William Ave,North,Industrial,1,1.64,7277 William Ave,Allentown ,PA,18106,18.3,9573,0.03,N/A
+Denholtz Properties,East,89 S Commerce Way,North,Industrial,1,1.72,89 S Commerce Way,Bethlehem ,PA,18017,18.2,9575,0.03,N/A
+Denholtz Properties,East,969 Postal Rd,North,Industrial,1,2.06,969 Postal Rd,Allentown ,PA,18109,18.3,9573,0.05,N/A
+Denholtz Properties,East,7036 Snowdrift Rd,North,Industrial,1,2.51,7036 Snowdrift Rd,Allentown ,PA,18106,18.3,9575,0.1,N/A
+Denholtz Properties,East,57 S Commerce Way,North,Industrial,1,2.75,57 S Commerce Way,Bethlehem ,PA,18017,18.2,9574,0.04,N/A
+Diversified Management Plus,East,1000 Bishop Gate Blvd,Philly Metro,Office,1,2.28,1000 Bishop Gate Blvd,Mount Laurel,NJ,08054,9.1,6561,0.14,N/A
+Diversified Management Plus,East,1800/1810/1820 Commerce Center,Philly Metro,Office,1,5.74,1800/1810/1820 Commerce Center,Cherry Hill,NJ,08002,9.1,6255,0.41,N/A
+Diversified Management Plus,East,2000/4000/9000/10000/15000 Midlantic Dr,Philly Metro,Office,3,23.14,2000/4000/9000/10000/15000 Midlantic Dr,Mount Laurel,NJ,08054,9.1,3879,0.24,N/A
+Diversified Management Plus,East,Bala Plaza,Central,Office,5,29.4,251 St Asaphs Rd,Bala Cynwyd,PA,19004,9.7,7226,2.18,N/A
+FedEx,West,FedEx Warehouse 615 Aviation ,North,Industrial,2,15.61,615 Aviation Rd,Reading,PA,19605,15.3,5865,0.07,N/A
+Gigliotti Group Inc.,Central,Village Shires,Central,Retail,1,2.61,1470 Buck Road,Southampton,PA,18966,11.1,9973,0.3,N/A
+Gigliotti Group Inc.,Central,Summit Square Shopping Center,Central,Retail,2,8.85,3 Summit Square Ctr,Langhorne,PA,19047,10.9,5342,0.54,N/A
+Glazer Properties,National,Shops at City Line,Philly Metro,Retail,1,1.31,4500-4520 City Avenue,Philadelphia,PA,19131,9.7,13019,0.11,N/A
+Glazer Properties,National,Allentown Towne Center,North,Retail,1,19.1,4701-4713 W Tilghman St,Allentown,PA,19104,18.3,3196,0.26,N/A
+Goodman Properties,Central,"Samson Development Company, L.P. ",Philly Metro,Retail,1,0.41,1054-1056 Baltimore Pike,Springfield,PA,19046,7.6,17806,0.05,N/A
+Goodman Properties,Central,1100 Baltimore Pike,Philly Metro,Retail,1,0.46,1100 Baltimore Pike,Springfield,PA,19046,7.6,17171,0.07,N/A
+Goodman Properties,Central,"Newsquared Realty Partners, L.P.",Philly Metro,Retail,1,0.57,3511 West Chester Pike,Newtown Square,PA ,19073,11,16377,0.03,N/A
+Goodman Properties,Central,"North Baltimore Realty Associates, L.P.",Philly Metro,Retail,1,0.72,101-103 Baltimore Pike,Springfield,PA,19046,7.6,11636,0.08,N/A
+Helm Property Group,National,416 S Bethlehem Pike,Central ,Office,1,0.47,416 S Bethlehem Pike,Ambler,PA,19002,11.8,16641,0.08,N/A
+Helm Property Group,National,254 W Lancaster Ave,West,Office,1,0.71,254 W Lancaster Ave,Malvern,PA,19355,12.7,13018,0.03,N/A
+Helm Property Group,National,Lidl Plaza,East,Retail,1,4.73,3121 Fire Rd,Egg Harbor Twp,NJ,08234,8.3,4554,0.25,N/A
+Kairos,Central,2045 Wheatsheaf Ln,Philly Metro,Industrial,1,2.56,2045 Wheatsheaf Lane,Philadelphia ,PA,19124,7.9,6545,0.28,N/A
+Kairos,Central,11500 Roosevelt Blvd,Philly Metro,Industrial,1,2.93,11500 Roosevelt Blvd ,Philadelphia ,PA,19116,9.6,4091,0.02,N/A
+Kairos,Central,1771 Tomlinson Road,Philly Metro,Office,1,5.62,1771 Tomlinson Road,Philadelphia ,PA,19116,9.6,3876,0.06,N/A
+Kairos,Central,9901 Blue Grass Rd,Philly Metro,Industrial,1,7.3,9901 Bluegrass Road ,Philadelphia ,PA,19114,9.4,3402,0.07,N/A
+Kairos,Central,600-602 Office Center Dr,Central,Office,4,11.66,600-602 Office Center Dr,Fort Washington,PA,19034,11.2,6158,1,N/A
+Kairos,Central,"100, 200, 400 Commerce Dr",National,Office,2,12.15,"100, 200, 400 Commerce Dr",Newark,DE,19713,8.3,4758,0.43,N/A
+Katz Properties Retail (KPR Centers),Central ,The Shops at Blue Bell,Central,Retail,3,6.54,1760 Dekalb Pike,Blue Bell,PA,19422,11.7,5305,0.29,N/A
+Lamar Companies,National,Village at Cambridge Crossing,Philly Metro,Retail,2,10.58,4200 Dearborn Circle,Mount Laurel,NJ,08054,9.1,4808,0.89,N/A
+Legend Properties,Central,The Village of Taunton Forge,Philly Metro,Retail,2,8.08,200 Tuckerton Rd,Medford,NJ,08055,9.1,7802,0.59,N/A
+Madison Marquette,Philly Metro,Glen Eagle Square,Philly Metro,Retail,4,10.4,475-543 Wilmington Pike,Glen Mills,PA,19342,8.5,6366,0.53,N/A
+"NAI Geis Realty Group, Inc.",Philly Metro,1597 Medical Drive,Central,Medical,1,0.54,1597 Medical Drive,Pottstown,PA,19464,13.7,13829,0.02,N/A
+"NAI Geis Realty Group, Inc.",Philly Metro,2550-2650 Eisenhower Ave,Central,Office,1,2,2550-2650 Eisenhower Ave,Trooper,PA,19403,12,7185,0.21,N/A
+Paramount Realty,West,Shoppes at Shillington ,West,Retail,1,6.28,600 E Lancaster Ave,Shillington,PA,19607,14.5,4219,0.29,N/A
+Paramount Realty,West,Quarry Crossings,West,Retail,3,6.94,1300 N Charlotte St,Downingtown,PA,19335,11.4,3882,0.45,N/A
+Paramount Realty,West,North End Shopping Center,Central,Retail,1,7.01,1300 N Charlotte St,Pottstown,PA,19464,13.7,3945,0.34,N/A
+Paramount Realty,West,Lionville Shopping Center,West,Retail,1,7.16,126 Eagleview Blvd,Exton,PA,19341,11.4,3698,0.36,N/A
+Paramount Realty,West,Marketplace at Westtown ,West,Retail,1,8.15,1502 West Chester Pike,West Chester,PA,19380,11.4,4169,0.24,N/A
+Paramount Realty,West,Dreshertown Plaza ,Central,Retail,1,8.55,1650 Limekiln Pike,Dreshertown,PA,19025,11.6,4514,0.68,N/A
+Paramount Realty,West,Centre Square Commons ,Central,Retail,2,8.96,903 Dekalb Pike,Blue Bell,PA,19422,11.7,4973,1.24,N/A
+Paramount Realty,West,Festival at Exton,West,Retail,1,9.24,400 W Lincoln Hwy,Exton,PA,19341,11.4,3207,0.43,N/A
+Paramount Realty,West,Limerick Crossing,Central,Retail,1,9.34,5 W Ridge Pike,Limerick,PA,19468,13.7,4148,0.53,N/A
+Paramount Realty,West,Spring Towne Shopping Center,West,Retail,1,16.26,2631 Shillington Rd,Sinking Spring,PA,19608,14.5,3000,0.28,N/A
+Paramount Realty,West,Berkshire Square,West,Retail,1,17.53,1183 Berkshire Blvd,Wyomissing,PA,19610,14.5,3268,0.9,N/A
+Paramount Realty,West,Townsquare Plaza ,West,Retail,1,17.87,4300 N 5th Street Hwy,Temple,PA,19560,15.3,3307,1.23,N/A
+Scully Company,Central,Noble Plaza,Central,Office,1,2.35,801 Old York Rd,Jenkintown,PA,19046,11,6022,0.08,N/A
+"Secure Real Estate Management, L.P.",Central,New Garden Town Square,West,Retail,3,8.24,350 Scarlett Rd,Kennett Square,PA,19348,8.3,4198,0.27,N/A
+"Seyon Management, LLC",National,5 Chelsea Pkwy,Philly Metro,Industrial,1,0.83,5 Chelsea Pkwy,Boothwyn,PA,19061,7.4,13278,0.06,N/A
+"Seyon Management, LLC",National,780 Primos Ave,Philly Metro,Industrial,1,1.37,780 Primos Ave,Folcroft,PA,19032,7.4,9373,0.05,N/A
+"Seyon Management, LLC",National,1 Chelsea Pkwy,Philly Metro,Industrial,1,1.56,1 Chelsea Pkwy,Boothwyn,PA,19061,7.4,8344,0.05,N/A
+"Seyon Management, LLC",National,3 Chelsea Pkwy,Philly Metro,Industrial,1,1.63,3 Chelsea Pkwy,Boothwyn,PA,19061,7.4,7913,0.05,N/A
+"Seyon Management, LLC",National,7 Chelsea Pkwy,Philly Metro,Industrial,1,3.03,7 Chelsea Pkwy,Boothwyn,PA,19061,7.4,7585,0.13,N/A
+"Seyon Management, LLC",National,1 Judy Way,Philly Metro,Industrial,1,3.14,1 Judy Way,Aston,PA,19014,8.5,4442,0.07,N/A
+Site Centers,National,Echelon Village Plaza,Philly Metro,Retail,1,6,1120 White Horse Rd,Voorhees,NJ,08043,7.6,4887,0.31,N/A
+Site Centers,National,Hamilton Marketplace,Philly Metro,Retail,5,61.15,US 130 & Klockner Rd,Hamilton,NJ,08691,9,3768,4.04,N/A
+SVN Imperial Realty,North,4150 Easton Ave,North,Retail,1,0.5,4150 Easton Ave,Bethlehem,PA,18020,18.3,17745,0.07,N/A
+SVN Imperial Realty,North,2101 Emerick Blvd,North,Medical,1,1.31,2101 Emerick Blvd,Bethlehem,PA,18020,18.3,8770,0.15,N/A
+Wolf Commercial Real Estate (WCRE),Philly Metro,1 Holtec Dr,Philly Metro,Office,1,0.99,1 Holtec Dr,Marlton,NJ,08053,9.1,9611,0.05,N/A
+Wolf Commercial Real Estate (WCRE),Philly Metro,63 Kresson Rd,Philly Metro,Medical,1,0.99,63 Kresson Rd,Cherry Hill,NJ,08034,9.1,9973,0.06,N/A
+Wolf Commercial Real Estate (WCRE),Philly Metro,496 Kings Highway ,Philly Metro,Office,1,1.73,496 Kings Highway ,Cherry Hill,NJ,08034,9.1,7264,0.15,N/A
+Wolf Commercial Real Estate (WCRE),Philly Metro,1020-1060 Kings Highway,Philly Metro,Office,1,7.72,1020-1060 Kings Highway,Cherry Hill,NJ,08034,9.1,4728,0.36,N/A
+Wolfson Group Inc.,Central,Eddystone Crossings,Philly Metro,Retail,3,6.95,1570 Chester Pike,Eddystone,PA,19022,7.4,4197,0.43,N/A
