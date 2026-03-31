@@ -159,11 +159,34 @@ def create_regional_features(df):
     
     return df
 
+def _fix_simple_imputers(obj, visited=None):
+    """Patch SimpleImputer objects missing _fill_dtype (sklearn < 1.4 compat)."""
+    if visited is None:
+        visited = set()
+    if id(obj) in visited:
+        return
+    visited.add(id(obj))
+    from sklearn.impute import SimpleImputer
+    if isinstance(obj, SimpleImputer) and not hasattr(obj, '_fill_dtype'):
+        if hasattr(obj, 'statistics_') and obj.statistics_ is not None:
+            obj._fill_dtype = obj.statistics_.dtype
+    for attr in ('steps', 'estimators_', 'estimators'):
+        if hasattr(obj, attr):
+            items = getattr(obj, attr)
+            for item in items:
+                _fix_simple_imputers(item[-1] if isinstance(item, tuple) else item, visited)
+    for attr in ('transformers', 'transformers_'):
+        if hasattr(obj, attr):
+            for _, transformer, _ in getattr(obj, attr):
+                _fix_simple_imputers(transformer, visited)
+    if hasattr(obj, 'estimator'):
+        _fix_simple_imputers(obj.estimator, visited)
+
 def predict_base_price_from_saved_model(model_path, input_df):
     """Predict base price (without complexity multiplier) using saved model."""
     try:
         model_config = joblib.load(model_path)
-        
+
         # Handle both old format (just model) and new format (config dict)
         if isinstance(model_config, dict):
             model = model_config['model']
@@ -188,6 +211,7 @@ def predict_base_price_from_saved_model(model_path, input_df):
                     'region_Total Acreage_mean', 'region_Avg Snowfall (3-Year)_mean'
                 ]
         
+        _fix_simple_imputers(model)
         input_df = input_df.copy()
         
         # Remove complexity from the data for prediction
